@@ -1,0 +1,1 @@
+var CrmAppointzaapp = angular.module('CrmAppointzaapp', []);
