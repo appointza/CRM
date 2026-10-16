@@ -516,10 +516,16 @@ function WhatsAppSection({ orgId }: { orgId: string }) {
           </Field>
         ) : null}
         <Field label="Callback URL (paste in Meta)" wide>
-          <CopyInput value={cfg.webhookUrl} readOnly className="font-mono text-xs" />
+          <CopyInput
+            value={cfg.webhookUrl ?? ""}
+            onChange={(v) => set("webhookUrl", v.trim())}
+            placeholder="https://your-domain.com/webhooks/whatsapp"
+            className="font-mono text-xs"
+          />
           <p className="text-xs text-muted-foreground mt-1">
-            Meta → WhatsApp → Configuration → Webhook. Subscribe the <b>messages</b> field. For local dev, expose
-            your API (e.g. ngrok on port 5050) and set ApplicationSettings:baseUrl on the server.
+            Meta → WhatsApp → Configuration → Webhook. Subscribe the <b>messages</b> field. Use your public HTTPS URL
+            ending in <code className="text-xs">/webhooks/whatsapp</code> (e.g. ngrok or production). Click{" "}
+            <b>Save</b> after editing so Meta and this workspace stay in sync.
           </p>
         </Field>
         <Field label="Webhook verify token" wide>
@@ -590,9 +596,15 @@ function FacebookSection({ orgId }: { orgId: string }) {
           <Input type="password" value={cfg.appSecret ?? ""} onChange={(e) => set("appSecret", e.target.value)} placeholder="Meta App → Settings → Basic" />
         </Field>
         <Field label="Callback URL (paste in Meta)" wide>
-          <CopyInput value={cfg.webhookUrl} readOnly className="font-mono text-xs" />
+          <CopyInput
+            value={cfg.webhookUrl ?? ""}
+            onChange={(v) => set("webhookUrl", v.trim())}
+            placeholder="https://your-domain.com/webhooks/facebook"
+            className="font-mono text-xs"
+          />
           <p className="text-xs text-muted-foreground mt-1">
-            Meta App Dashboard → Messenger → Webhooks. Subscribe the page to the <code>messages</code> field.
+            Meta App Dashboard → Messenger → Webhooks. Subscribe the page to the <code>messages</code> field. Edit for
+            ngrok or custom host, then <b>Save</b>.
           </p>
         </Field>
         <Field label="Webhook verify token" wide>
